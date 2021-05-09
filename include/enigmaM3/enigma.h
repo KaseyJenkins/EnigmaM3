@@ -5,23 +5,23 @@
 
 namespace enigmaM3 {
 
-    int myMod(const int &a, const int &b);
+    int myMod(const int &, const int &);
 
     // A = 0, B = 1... Z = 25
-    void normalizeASCIIindex(std::string &stringToNormalize);
+    void normalizeASCIIindex(std::string &);
 
     class Rotor {
 
     public:
-        Rotor(int rNumber, char lAbove, int ringSetting);
+        Rotor(int, char, int);
 
         void turnOver();
 
         bool isAtNotch() const;
 
-        void transformationRightToLeft(char &c);
+        void transformationRightToLeft(char &);
 
-        void transformationLeftToRight(char &c);
+        void transformationLeftToRight(char &);
 
     private:
         int rotorNumber;
@@ -36,7 +36,7 @@ namespace enigmaM3 {
         void rotorWiringSequenceReversedInitialization();
 
         //https://crypto.stackexchange.com/a/71327
-        void RingSetting(int ringSet);
+        void RingSetting(int);
 
         friend void normalizeASCIIindex(std::string &);
     };
@@ -46,15 +46,15 @@ namespace enigmaM3 {
 
     public:
 
-        explicit Reflector(char c);
+        explicit Reflector(char);
 
-        void transformationReflector(char &c);
+        void transformationReflector(char &);
 
     private:
 
         std::string ReflectorWiringSequence;
 
-        std::string reflectorWiringSequenceInitialization(char cR);
+        std::string reflectorWiringSequenceInitialization(char);
 
         friend void normalizeASCIIindex(std::string &);
     };
@@ -63,9 +63,9 @@ namespace enigmaM3 {
 
     public:
 
-        explicit Plugboard(std::string &s);
+        explicit Plugboard(std::string &);
 
-        void plugboardSubstitution(char &c);
+        void plugboardSubstitution(char &);
 
     private:
 
