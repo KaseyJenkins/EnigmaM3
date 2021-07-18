@@ -34,68 +34,75 @@
 ///////////////////////////////////////////////////////////////////////////////
 /// Class MainFrameBase
 ///////////////////////////////////////////////////////////////////////////////
-class MainFrameBase : public wxFrame
-{
+class MainFrameBase : public wxFrame {
 private:
 
 protected:
-    wxMenuBar* MainMenuBar;
-    wxMenu* FileMenu;
-    wxMenu* HelpMenu;
-    wxPanel* MainPanel;
-    wxTextCtrl* m_textCtrlInput;
-    wxTextCtrl* m_textCtrlOutput;
-    wxButton* m_button1_Encrypt;
+    wxMenuBar *MainMenuBar;
+    wxMenu *FileMenu;
+    wxMenu *HelpMenu;
+    wxPanel *MainPanel;
+    wxTextCtrl *m_textCtrlInput;
+    wxTextCtrl *m_textCtrlOutput;
+    wxButton *m_button1_Encrypt;
 
     // Virtual event handlers, overide them in your derived class
-    virtual void OnPreferencesMenuItemSelected( wxCommandEvent& event ) { event.Skip(); }
-    virtual void OnTextInput( wxCommandEvent& event ) { event.Skip(); }
-    virtual void OnEncryptButtonClick( wxCommandEvent& event ) { event.Skip(); }
+    virtual void OnClose(wxCloseEvent &event) { event.Skip(); }
+
+    virtual void OnPreferencesMenuItemSelected(wxCommandEvent &event) { event.Skip(); }
+
+    virtual void OnTextInput(wxCommandEvent &event) { event.Skip(); }
+
+    virtual void OnEncryptButtonClick(wxCommandEvent &event) { event.Skip(); }
 
 
 public:
 
-    MainFrameBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("EnigmaM3"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 573,377 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+    MainFrameBase(wxWindow *parent, wxWindowID id = wxID_ANY, const wxString &title = wxT("EnigmaM3"),
+                  const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxSize(573, 377),
+                  long style = wxDEFAULT_FRAME_STYLE | wxTAB_TRAVERSAL);
 
     ~MainFrameBase();
 
 };
 
 
-
 ///////////////////////////////////////////////////////////////////////////////
 /// Class PreferencesDialogBase
 ///////////////////////////////////////////////////////////////////////////////
-class PreferencesDialogBase : public wxDialog
-{
+class PreferencesDialogBase : public wxDialog {
 private:
 
 protected:
-    wxPanel* m_panel6;
-    wxChoice* m_choice101;
-    wxPanel* m_panel2;
-    wxChoice* m_choice2;
-    wxChoice* m_choice3;
-    wxChoice* m_choice4;
-    wxPanel* m_panel3;
-    wxChoice* m_choice5;
-    wxChoice* m_choice6;
-    wxChoice* m_choice7;
-    wxPanel* m_panel4;
-    wxChoice* m_choice8;
-    wxChoice* m_choice9;
-    wxChoice* m_choice10;
-    wxPanel* m_panel5;
-    wxButton* m_button2;
-    wxButton* m_button3;
+    wxPanel *m_panel6;
+    wxChoice *ReflectorChoice;
+    wxPanel *m_panel2;
+    wxChoice *Rotor1Choice;
+    wxChoice *Rotor2Choice;
+    wxChoice *Rotor3Choice;
+    wxPanel *m_panel3;
+    wxChoice *Ring1Choice;
+    wxChoice *Ring2Choice;
+    wxChoice *Ring3Choice;
+    wxPanel *m_panel4;
+    wxChoice *InitialPosition1Choice;
+    wxChoice *InitialPosition2Choice;
+    wxChoice *InitialPosition3Choice;
+    wxPanel *m_panel5;
+    wxButton *m_button2;
+    wxButton *m_button3;
 
     // Virtual event handlers, overide them in your derived class
-    virtual void OnOkButtonClick( wxCommandEvent& event ) { event.Skip(); }
-    virtual void OnCancelButtonClick( wxCommandEvent& event ) { event.Skip(); }
+    virtual void OnOkButtonClick(wxCommandEvent &event) { event.Skip(); }
+
+    virtual void OnCancelButtonClick(wxCommandEvent &event) { event.Skip(); }
 
 public:
 
-    PreferencesDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("EnigmaM3 - Preferences"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_DIALOG_STYLE );
+    PreferencesDialogBase(wxWindow *parent, wxWindowID id = wxID_ANY,
+                          const wxString &title = wxT("EnigmaM3 - Preferences"), const wxPoint &pos = wxDefaultPosition,
+                          const wxSize &size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE);
+
     ~PreferencesDialogBase();
 
 };

@@ -16,8 +16,9 @@ if(wxWidgets_FOUND)
             Application.cpp Application.hpp
             GraphicUserInterface.cpp GraphicUserInterface.hpp
 
-            GlobalPreferencesValues.cpp GlobalPreferencesValues.hpp
             stringModifier.cpp stringModifier.hpp
+
+            UserPreferences.cpp UserPreferences.hpp
 
             Forms/MainFrame.cpp Forms/MainFrame.h
             Forms/Forms.cpp Forms/Forms.h
@@ -26,14 +27,14 @@ if(wxWidgets_FOUND)
             )
 
     # Define the build target for the executable
-    add_executable(app ${SRC_FILES})
+    add_executable(EnigmaM3-windows-x64 ${SRC_FILES})
 
-    target_compile_features(app PRIVATE cxx_std_17)
+    target_compile_features(EnigmaM3-windows-x64 PRIVATE cxx_std_17)
 
     # Link required libraries to the executable
-    target_link_libraries(app ${wxWidgets_LIBRARIES})
-    target_link_libraries(app -mwindows)
-    target_link_libraries(app enigma_library)
+    target_link_libraries(EnigmaM3-windows-x64 ${wxWidgets_LIBRARIES})
+    target_link_libraries(EnigmaM3-windows-x64 -mwindows)
+    target_link_libraries(EnigmaM3-windows-x64 enigma_library)
 
 elseif(NOT wxWidgets_FOUND)
     message(FATAL_ERROR "Could not find WX!")

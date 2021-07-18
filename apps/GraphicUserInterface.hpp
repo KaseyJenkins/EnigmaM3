@@ -10,6 +10,7 @@
 
 #endif
 
+#include "UserPreferences.hpp"
 
 
 class GraphicUserInterface : public wxApp {
@@ -17,7 +18,14 @@ private:
 public:
     virtual bool OnInit();
 
+    virtual const UserPreferences &GetPreferences() const { return Preferences; }
+
+    virtual void SetPreferences(const UserPreferences &preferences);
+
+protected:
+    UserPreferences Preferences;
 };
 
+extern GraphicUserInterface *Gui;
 
 #endif //ENIGMA_GRAPHICUSERINTERFACE_HPP

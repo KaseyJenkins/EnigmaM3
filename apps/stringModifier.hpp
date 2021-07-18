@@ -2,7 +2,8 @@
 #define ENIGMA_STRINGMODIFIER_HPP
 
 #include "enigmaM3/enigma.h"
-#include "GlobalPreferencesValues.hpp"
+#include "GraphicUserInterface.hpp"
+
 
 inline void
 mainSequence(std::string &toChange, enigmaM3::Rotor &rotorIII, enigmaM3::Rotor &rotorII, enigmaM3::Rotor &rotorI,
@@ -63,8 +64,7 @@ initializationSequence(std::string &message, const std::array<int, 3> &rotors, c
 
 }
 
-
-int rotorIntSettingConversion(const wxString &rotorSettingStringValue) {
+inline int rotorIntSettingConversion(const wxString &rotorSettingStringValue) {
 
     if (rotorSettingStringValue == "I") { return 1; }
     if (rotorSettingStringValue == "II") { return 2; }
@@ -77,8 +77,8 @@ int rotorIntSettingConversion(const wxString &rotorSettingStringValue) {
 
 }
 
-char reflectorCharConversion(const wxString &reflectorValue) {
-    if (reflector_Value == "UKW-B") {
+inline char reflectorCharConversion(const wxString &reflectorValue) {
+    if (reflectorValue == "UKW-B") {
         return 'B';
     } else {
         return 'C';
@@ -88,17 +88,26 @@ char reflectorCharConversion(const wxString &reflectorValue) {
 
 inline wxString mainFunc(const wxString &stringToChangeWx) {
 
+    //const UserPreferences& prefs = Gui->GetPreferences();
 
     std::string toChange = stringToChangeWx.Upper().ToStdString();
 
-    std::array<int, 3> rotors = {rotorIntSettingConversion(rotor_SettingString_1),
-                                 rotorIntSettingConversion(rotor_SettingString_2),
-                                 rotorIntSettingConversion(rotor_SettingString_3)}; //from left to right
-    std::string lAbove = (initialPosition_1 + initialPosition_2 + initialPosition_3).ToStdString(); //from left to right
-    std::array<int, 3> ringSetting = {wxAtoi(ring_SettingString_1), wxAtoi(ring_SettingString_2),
-                                      wxAtoi(ring_SettingString_3)}; //from left to right
-    char reflector = reflectorCharConversion(reflector_Value);
-    std::string plugboard = " "; // "ZAKJ" A <=> Z, K <=> J
+    std::array<int, 3> rotors = {rotorIntSettingConversion(Gui->GetPreferences().Rotor1),
+                                 rotorIntSettingConversion(Gui->GetPreferences().Rotor2),
+                                 rotorIntSettingConversion(Gui->GetPreferences().Rotor3)}; //from left to right
+
+    std::string lAbove = (Gui->GetPreferences().InitialPosition1 +
+                          Gui->GetPreferences().InitialPosition2 +
+                          Gui->GetPreferences().InitialPosition3).ToStdString(); //from left to right
+
+    std::array<int, 3> ringSetting = {wxAtoi(Gui->GetPreferences().Ring1),
+                                      wxAtoi(Gui->GetPreferences().Ring2),
+                                      wxAtoi(Gui->GetPreferences().Ring3)}; //from left to right
+
+    char reflector = reflectorCharConversion(Gui->GetPreferences().Reflector);
+
+    std::string plugboard = " "; // A <=> Z, K <=> J
+
 
 
     initializationSequence(toChange, rotors, lAbove, ringSetting, reflector, plugboard);

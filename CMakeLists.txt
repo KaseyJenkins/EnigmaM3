@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19)
 project(
-        Enigma
-        VERSION 0.2.0
+        EnigmaM3
+        VERSION 0.2.1
         LANGUAGES CXX)
 
 # The compiled library code is here

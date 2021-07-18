@@ -1,35 +1,43 @@
 #include "PreferencesDialog.hpp"
+#include "../GraphicUserInterface.hpp"
+
+
+#define EM3_JOIN_ARGS(a, b) a##b
+#define EM3_JOIN(a, b) EM3_JOIN_ARGS(a,b)
+
 
 PreferencesDialog::PreferencesDialog(wxWindow *parent)
         :
-        PreferencesDialogBase(parent) {
-    TransferDataToWindow();
+        PreferencesDialogBase(parent),
+        Preferences(Gui->GetPreferences()) {
 
-    m_choice101->SetValidator(wxGenericValidator(&reflector_Value));
+#define EM3_CHOICE_VALIDATOR(NAME) (EM3_JOIN(NAME,Choice))->SetValidator (wxGenericValidator (&Preferences.NAME));
 
-    // Rotor Settings
-    m_choice2->SetValidator(wxGenericValidator(&rotor_SettingString_1));
-    m_choice3->SetValidator(wxGenericValidator(&rotor_SettingString_2));
-    m_choice4->SetValidator(wxGenericValidator(&rotor_SettingString_3));
+    EM3_CHOICE_VALIDATOR(Reflector);
 
-    // Ring Settings
-    m_choice5->SetValidator(wxGenericValidator(&ring_SettingString_1));
-    m_choice6->SetValidator(wxGenericValidator(&ring_SettingString_2));
-    m_choice7->SetValidator(wxGenericValidator(&ring_SettingString_3));
+    EM3_CHOICE_VALIDATOR(Rotor1);
+    EM3_CHOICE_VALIDATOR(Rotor2);
+    EM3_CHOICE_VALIDATOR(Rotor3);
 
-    // Initial Position
-    m_choice8->SetValidator(wxGenericValidator(&initialPosition_1));
-    m_choice9->SetValidator(wxGenericValidator(&initialPosition_2));
-    m_choice10->SetValidator(wxGenericValidator(&initialPosition_3));
+    EM3_CHOICE_VALIDATOR(Ring1);
+    EM3_CHOICE_VALIDATOR(Ring2);
+    EM3_CHOICE_VALIDATOR(Ring3);
+
+    EM3_CHOICE_VALIDATOR(InitialPosition1);
+    EM3_CHOICE_VALIDATOR(InitialPosition2);
+    EM3_CHOICE_VALIDATOR(InitialPosition3);
+
 
 }
 
 void PreferencesDialog::OnOkButtonClick(wxCommandEvent &event) {
+// TODO: Implement OnOkButtonClick
 
     if (Validate() && TransferDataFromWindow()) {
-        if (IsModal())
+        if (IsModal()) {
+            Gui->SetPreferences(Preferences);
             EndModal(wxID_OK);
-        else {
+        } else {
             SetReturnCode(wxID_OK);
             this->Show(false);
         }
