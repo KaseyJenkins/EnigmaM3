@@ -28,7 +28,7 @@ MainFrameBase::MainFrameBase(wxWindow *parent, wxWindowID id, const wxString &ti
     CreateNewHelpMenuItem = new wxMenuItem(HelpMenu, wxID_ANY, wxString(wxT("About")), wxEmptyString, wxITEM_NORMAL);
     HelpMenu->Append(CreateNewHelpMenuItem);
 
-    //MainMenuBar->Append( HelpMenu, wxT("&Help") );
+    MainMenuBar->Append(HelpMenu, wxT("&Help"));
 
     this->SetMenuBar(MainMenuBar);
 
@@ -83,6 +83,8 @@ MainFrameBase::MainFrameBase(wxWindow *parent, wxWindowID id, const wxString &ti
     this->Connect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler(MainFrameBase::OnClose));
     FileMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBase::OnPreferencesMenuItemSelected),
                    this, PreferencesFileMenuItem->GetId());
+    HelpMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBase::OnAboutMenuItemSelected), this,
+                   CreateNewHelpMenuItem->GetId());
     m_textCtrlInput->Bind(wxEVT_COMMAND_TEXT_UPDATED, &MainFrameBase::OnTextInput, this);
     m_button1_Encrypt->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MainFrameBase::OnEncryptButtonClick, this);
 }
@@ -326,14 +328,25 @@ PreferencesDialogBase::PreferencesDialogBase(wxWindow *parent, wxWindowID id, co
     wxBoxSizer *bSizer11;
     bSizer11 = new wxBoxSizer(wxHORIZONTAL);
 
+    m_button4 = new wxButton(m_panel5, wxID_ANY, wxT("More Settings..."), wxDefaultPosition, wxDefaultSize, 0);
+    m_menu4 = new wxMenu();
+    wxMenuItem *PlugBoardSettingsMenuItem;
+    PlugBoardSettingsMenuItem = new wxMenuItem(m_menu4, wxID_ANY, wxString(wxT("PlugBoard Settings...")), wxEmptyString,
+                                               wxITEM_NORMAL);
+    m_menu4->Append(PlugBoardSettingsMenuItem);
+
+    //m_button4->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(PreferencesDialogBase::m_button4OnContextMenu), NULL, this);
+
+    bSizer11->Add(m_button4, 14, wxALL, 5);
+
     m_button2 = new wxButton(m_panel5, wxID_ANY, wxT("OK"), wxDefaultPosition, wxDefaultSize, 0);
-    bSizer11->Add(m_button2, 0, wxALL, 5);
+    bSizer11->Add(m_button2, 10, wxALL, 5);
 
     m_button3 = new wxButton(m_panel5, wxID_ANY, wxT("Cancel"), wxDefaultPosition, wxDefaultSize, 0);
-    bSizer11->Add(m_button3, 0, wxALL, 5);
+    bSizer11->Add(m_button3, 10, wxALL, 5);
 
 
-    bSizer10->Add(bSizer11, 1, wxALIGN_RIGHT, 5);
+    bSizer10->Add(bSizer11, 1, wxEXPAND, 5);
 
 
     m_panel5->SetSizer(bSizer10);
@@ -352,7 +365,11 @@ PreferencesDialogBase::PreferencesDialogBase(wxWindow *parent, wxWindowID id, co
     m_button2->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &PreferencesDialogBase::OnOkButtonClick, this);
     m_button3->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(PreferencesDialogBase::OnCancelButtonClick),
                        NULL, this);
-
+    m_button4->Connect(wxEVT_COMMAND_BUTTON_CLICKED,
+                       wxCommandEventHandler(PreferencesDialogBase::OnMoreSettingsButtonClick), NULL, this);
+    m_menu4->Bind(wxEVT_COMMAND_MENU_SELECTED,
+                  wxCommandEventHandler(PreferencesDialogBase::OnPlugBoardSettingsMenuItemSelected), this,
+                  PlugBoardSettingsMenuItem->GetId());
 
 }
 
@@ -361,6 +378,240 @@ PreferencesDialogBase::~PreferencesDialogBase() {
     m_button2->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &PreferencesDialogBase::OnOkButtonClick, this);
     m_button3->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,
                           wxCommandEventHandler(PreferencesDialogBase::OnCancelButtonClick), NULL, this);
+    m_button4->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,
+                          wxCommandEventHandler(PreferencesDialogBase::OnMoreSettingsButtonClick), NULL, this);
 
+
+    delete m_menu4;
+}
+
+PlugBoardSettingsDialogBase::PlugBoardSettingsDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+    this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+
+    wxBoxSizer* bSizer13;
+    bSizer13 = new wxBoxSizer( wxVERTICAL );
+
+    m_panel7 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+    wxBoxSizer* bSizer14;
+    bSizer14 = new wxBoxSizer( wxVERTICAL );
+
+    wxBoxSizer* bSizer15;
+    bSizer15 = new wxBoxSizer( wxHORIZONTAL );
+
+    m_textCtrl3 = new wxTextCtrl( m_panel7, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY );
+    bSizer15->Add( m_textCtrl3, 1, wxALL|wxEXPAND, 5 );
+
+
+    bSizer14->Add( bSizer15, 1, wxEXPAND, 5 );
+
+
+    m_panel7->SetSizer( bSizer14 );
+    m_panel7->Layout();
+    bSizer14->Fit( m_panel7 );
+    bSizer13->Add( m_panel7, 0, wxALL|wxEXPAND, 5 );
+
+    m_panel8 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+    wxBoxSizer* bSizer18;
+    bSizer18 = new wxBoxSizer( wxVERTICAL );
+
+    wxBoxSizer* bSizer19;
+    bSizer19 = new wxBoxSizer( wxHORIZONTAL );
+
+    m_toggleBtn_Q = new wxToggleButton( m_panel8, wxID_ANY, wxT("Q"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer19->Add( m_toggleBtn_Q, 1, wxALL, 5 );
+
+    m_toggleBtn_W = new wxToggleButton( m_panel8, wxID_ANY, wxT("W"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer19->Add( m_toggleBtn_W, 1, wxALL, 5 );
+
+    m_toggleBtn_E = new wxToggleButton( m_panel8, wxID_ANY, wxT("E"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer19->Add( m_toggleBtn_E, 1, wxALL, 5 );
+
+    m_toggleBtn_R = new wxToggleButton( m_panel8, wxID_ANY, wxT("R"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer19->Add( m_toggleBtn_R, 1, wxALL, 5 );
+
+    m_toggleBtn_T = new wxToggleButton( m_panel8, wxID_ANY, wxT("T"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer19->Add( m_toggleBtn_T, 1, wxALL, 5 );
+
+    m_toggleBtn_Y = new wxToggleButton( m_panel8, wxID_ANY, wxT("Y"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer19->Add( m_toggleBtn_Y, 1, wxALL, 5 );
+
+    m_toggleBtn_U = new wxToggleButton( m_panel8, wxID_ANY, wxT("U"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer19->Add( m_toggleBtn_U, 1, wxALL, 5 );
+
+    m_toggleBtn_I = new wxToggleButton( m_panel8, wxID_ANY, wxT("I"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer19->Add( m_toggleBtn_I, 1, wxALL, 5 );
+
+    m_toggleBtn_O = new wxToggleButton( m_panel8, wxID_ANY, wxT("O"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer19->Add( m_toggleBtn_O, 1, wxALL, 5 );
+
+    m_toggleBtn_P = new wxToggleButton( m_panel8, wxID_ANY, wxT("P"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer19->Add( m_toggleBtn_P, 1, wxALL, 5 );
+
+
+    bSizer18->Add( bSizer19, 1, wxEXPAND, 5 );
+
+    wxBoxSizer* bSizer20;
+    bSizer20 = new wxBoxSizer( wxHORIZONTAL );
+
+    m_toggleBtn_A = new wxToggleButton( m_panel8, wxID_ANY, wxT("A"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer20->Add( m_toggleBtn_A, 1, wxALL, 5 );
+
+    m_toggleBtn_S = new wxToggleButton( m_panel8, wxID_ANY, wxT("S"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer20->Add( m_toggleBtn_S, 1, wxALL, 5 );
+
+    m_toggleBtn_D = new wxToggleButton( m_panel8, wxID_ANY, wxT("D"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer20->Add( m_toggleBtn_D, 1, wxALL, 5 );
+
+    m_toggleBtn_F = new wxToggleButton( m_panel8, wxID_ANY, wxT("F"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer20->Add( m_toggleBtn_F, 1, wxALL, 5 );
+
+    m_toggleBtn_G = new wxToggleButton( m_panel8, wxID_ANY, wxT("G"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer20->Add( m_toggleBtn_G, 1, wxALL, 5 );
+
+    m_toggleBtn_H = new wxToggleButton( m_panel8, wxID_ANY, wxT("H"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer20->Add( m_toggleBtn_H, 1, wxALL, 5 );
+
+    m_toggleBtn_J = new wxToggleButton( m_panel8, wxID_ANY, wxT("J"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer20->Add( m_toggleBtn_J, 1, wxALL, 5 );
+
+    m_toggleBtn_K = new wxToggleButton( m_panel8, wxID_ANY, wxT("K"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer20->Add( m_toggleBtn_K, 1, wxALL, 5 );
+
+    m_toggleBtn_L = new wxToggleButton( m_panel8, wxID_ANY, wxT("L"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer20->Add( m_toggleBtn_L, 1, wxALL, 5 );
+
+
+    bSizer18->Add( bSizer20, 1, wxEXPAND, 5 );
+
+    wxBoxSizer* bSizer21;
+    bSizer21 = new wxBoxSizer( wxHORIZONTAL );
+
+    m_toggleBtn_Z = new wxToggleButton( m_panel8, wxID_ANY, wxT("Z"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer21->Add( m_toggleBtn_Z, 1, wxALL, 5 );
+
+    m_toggleBtn_X = new wxToggleButton( m_panel8, wxID_ANY, wxT("X"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer21->Add( m_toggleBtn_X, 1, wxALL, 5 );
+
+    m_toggleBtn_C = new wxToggleButton( m_panel8, wxID_ANY, wxT("C"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer21->Add( m_toggleBtn_C, 1, wxALL, 5 );
+
+    m_toggleBtn_V = new wxToggleButton( m_panel8, wxID_ANY, wxT("V"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer21->Add( m_toggleBtn_V, 1, wxALL, 5 );
+
+    m_toggleBtn_B = new wxToggleButton( m_panel8, wxID_ANY, wxT("B"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer21->Add( m_toggleBtn_B, 1, wxALL, 5 );
+
+    m_toggleBtn_N = new wxToggleButton( m_panel8, wxID_ANY, wxT("N"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer21->Add( m_toggleBtn_N, 1, wxALL, 5 );
+
+    m_toggleBtn_M = new wxToggleButton( m_panel8, wxID_ANY, wxT("M"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+    bSizer21->Add( m_toggleBtn_M, 1, wxALL, 5 );
+
+
+    bSizer18->Add( bSizer21, 1, wxEXPAND, 5 );
+
+
+    m_panel8->SetSizer( bSizer18 );
+    m_panel8->Layout();
+    bSizer18->Fit( m_panel8 );
+    bSizer13->Add( m_panel8, 0, wxEXPAND | wxALL, 5 );
+
+    m_panel9 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+    wxBoxSizer* bSizer16;
+    bSizer16 = new wxBoxSizer( wxVERTICAL );
+
+    wxBoxSizer* bSizer17;
+    bSizer17 = new wxBoxSizer( wxHORIZONTAL );
+
+    m_button5 = new wxButton( m_panel9, wxID_ANY, wxT("Reset"), wxDefaultPosition, wxDefaultSize, 0 );
+    bSizer17->Add( m_button5, 0, wxALL, 5 );
+
+    m_button6 = new wxButton( m_panel9, wxID_ANY, wxT("OK"), wxDefaultPosition, wxDefaultSize, 0 );
+    bSizer17->Add( m_button6, 0, wxALL, 5 );
+
+    m_button7 = new wxButton( m_panel9, wxID_ANY, wxT("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+    bSizer17->Add( m_button7, 0, wxALL, 5 );
+
+
+    bSizer16->Add( bSizer17, 1, wxALIGN_RIGHT, 5 );
+
+
+    m_panel9->SetSizer( bSizer16 );
+    m_panel9->Layout();
+    bSizer16->Fit( m_panel9 );
+    bSizer13->Add( m_panel9, 0, wxALL|wxEXPAND, 5 );
+
+
+    this->SetSizer( bSizer13 );
+    this->Layout();
+    bSizer13->Fit( this );
+
+    this->Centre( wxBOTH );
+
+    // Connect Events
+    m_toggleBtn_Q->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_Q ), NULL, this );
+    m_toggleBtn_W->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_W ), NULL, this );
+    m_toggleBtn_E->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_E ), NULL, this );
+    m_toggleBtn_R->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_R ), NULL, this );
+    m_toggleBtn_T->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_T ), NULL, this );
+    m_toggleBtn_Y->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_Y ), NULL, this );
+    m_toggleBtn_U->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_U ), NULL, this );
+    m_toggleBtn_I->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_I ), NULL, this );
+    m_toggleBtn_O->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_O ), NULL, this );
+    m_toggleBtn_P->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_P ), NULL, this );
+    m_toggleBtn_A->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_A ), NULL, this );
+    m_toggleBtn_S->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_S ), NULL, this );
+    m_toggleBtn_D->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_D ), NULL, this );
+    m_toggleBtn_F->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_F ), NULL, this );
+    m_toggleBtn_G->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_G ), NULL, this );
+    m_toggleBtn_H->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_H ), NULL, this );
+    m_toggleBtn_J->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_J ), NULL, this );
+    m_toggleBtn_K->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_K ), NULL, this );
+    m_toggleBtn_L->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_L ), NULL, this );
+    m_toggleBtn_Z->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_Z ), NULL, this );
+    m_toggleBtn_X->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_X ), NULL, this );
+    m_toggleBtn_C->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_C ), NULL, this );
+    m_toggleBtn_V->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_V ), NULL, this );
+    m_toggleBtn_B->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_B ), NULL, this );
+    m_toggleBtn_N->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_N ), NULL, this );
+    m_toggleBtn_M->Connect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_M ), NULL, this );
+    m_button5->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnResetButtonClick ), NULL, this );
+    m_button6->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnOkButtonClick ), NULL, this );
+    m_button7->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnCancelButtonClick ), NULL, this );
+}
+
+PlugBoardSettingsDialogBase::~PlugBoardSettingsDialogBase()
+{
+    // Disconnect Events
+    m_toggleBtn_Q->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_Q ), NULL, this );
+    m_toggleBtn_W->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_W ), NULL, this );
+    m_toggleBtn_E->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_E ), NULL, this );
+    m_toggleBtn_R->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_R ), NULL, this );
+    m_toggleBtn_T->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_T ), NULL, this );
+    m_toggleBtn_Y->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_Y ), NULL, this );
+    m_toggleBtn_U->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_U ), NULL, this );
+    m_toggleBtn_I->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_I ), NULL, this );
+    m_toggleBtn_O->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_O ), NULL, this );
+    m_toggleBtn_P->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_P ), NULL, this );
+    m_toggleBtn_A->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_A ), NULL, this );
+    m_toggleBtn_S->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_S ), NULL, this );
+    m_toggleBtn_D->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_D ), NULL, this );
+    m_toggleBtn_F->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_F ), NULL, this );
+    m_toggleBtn_G->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_G ), NULL, this );
+    m_toggleBtn_H->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_H ), NULL, this );
+    m_toggleBtn_J->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_J ), NULL, this );
+    m_toggleBtn_K->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_K ), NULL, this );
+    m_toggleBtn_L->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_L ), NULL, this );
+    m_toggleBtn_Z->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_Z ), NULL, this );
+    m_toggleBtn_X->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_X ), NULL, this );
+    m_toggleBtn_C->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_C ), NULL, this );
+    m_toggleBtn_V->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_V ), NULL, this );
+    m_toggleBtn_B->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_B ), NULL, this );
+    m_toggleBtn_N->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_N ), NULL, this );
+    m_toggleBtn_M->Disconnect( wxEVT_COMMAND_TOGGLEBUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnToggleButton_M ), NULL, this );
+    m_button5->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnResetButtonClick ), NULL, this );
+    m_button6->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnOkButtonClick ), NULL, this );
+    m_button7->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( PlugBoardSettingsDialogBase::OnCancelButtonClick ), NULL, this );
 
 }

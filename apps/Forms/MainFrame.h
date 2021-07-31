@@ -16,6 +16,8 @@ protected:
     // Handlers for MainFrameBase events.
     void OnPreferencesMenuItemSelected(wxCommandEvent &event);
 
+    void OnAboutMenuItemSelected( wxCommandEvent& event );
+
     void OnTextInput(wxCommandEvent &event);
 
     void OnEncryptButtonClick(wxCommandEvent &event);
@@ -31,5 +33,6 @@ public:
     MainFrame(wxWindow *parent);
     //// end generated class members
 };
+
 
 #endif // __MainFrame__

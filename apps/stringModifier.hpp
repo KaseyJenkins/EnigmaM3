@@ -106,7 +106,7 @@ inline wxString mainFunc(const wxString &stringToChangeWx) {
 
     char reflector = reflectorCharConversion(Gui->GetPreferences().Reflector);
 
-    std::string plugboard = " "; // A <=> Z, K <=> J
+    std::string plugboard = Gui->GetPreferences().PlugBoardwxString.ToStdString(); // A <=> Z, K <=> J
 
 
 

@@ -1,6 +1,9 @@
 #ifndef ENIGMAWXWIDGETS_PREFERENCESDIALOG_HPP
 #define ENIGMAWXWIDGETS_PREFERENCESDIALOG_HPP
 
+#define EM3_JOIN_ARGS(a, b) a##b
+#define EM3_JOIN(a, b) EM3_JOIN_ARGS(a,b)
+
 #include <wx/msgdlg.h>
 /**
 @file
@@ -19,9 +22,13 @@ class PreferencesDialog : public PreferencesDialogBase {
 
 protected:
     // Handlers for PreferencesDialogBase events.
-    void OnOkButtonClick(wxCommandEvent &event);
+    void OnOkButtonClick(wxCommandEvent &event) override;
 
-    void OnCancelButtonClick(wxCommandEvent &event) { Close(); }
+    void OnCancelButtonClick(wxCommandEvent &event) override { Close(); }
+
+    void OnMoreSettingsButtonClick( wxCommandEvent& event ) override;
+
+    void OnPlugBoardSettingsMenuItemSelected( wxCommandEvent& event ) override;
 
     UserPreferences Preferences;
 public:

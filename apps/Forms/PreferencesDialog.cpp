@@ -1,9 +1,9 @@
 #include "PreferencesDialog.hpp"
 #include "../GraphicUserInterface.hpp"
+#include "PlugBoardSettingsDialog.h"
 
 
-#define EM3_JOIN_ARGS(a, b) a##b
-#define EM3_JOIN(a, b) EM3_JOIN_ARGS(a,b)
+
 
 
 PreferencesDialog::PreferencesDialog(wxWindow *parent)
@@ -27,14 +27,14 @@ PreferencesDialog::PreferencesDialog(wxWindow *parent)
     EM3_CHOICE_VALIDATOR(InitialPosition2);
     EM3_CHOICE_VALIDATOR(InitialPosition3);
 
-
 }
 
 void PreferencesDialog::OnOkButtonClick(wxCommandEvent &event) {
-// TODO: Implement OnOkButtonClick
 
     if (Validate() && TransferDataFromWindow()) {
         if (IsModal()) {
+            /// TODO: Optimization
+            Preferences.PlugBoardwxString = Gui->GetPreferences().PlugBoardwxString;
             Gui->SetPreferences(Preferences);
             EndModal(wxID_OK);
         } else {
@@ -43,5 +43,16 @@ void PreferencesDialog::OnOkButtonClick(wxCommandEvent &event) {
         }
     }
 
+}
+
+void PreferencesDialog::OnMoreSettingsButtonClick( wxCommandEvent& event ) {
+    m_button4->PopupMenu( m_menu4, 2, 2  );
+}
+
+
+void PreferencesDialog::OnPlugBoardSettingsMenuItemSelected( wxCommandEvent& event )
+{
+    PlugBoardSettingsDialog dialog(this);
+    dialog.ShowModal();
 }
 

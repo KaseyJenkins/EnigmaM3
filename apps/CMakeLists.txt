@@ -23,6 +23,8 @@ if(wxWidgets_FOUND)
             Forms/MainFrame.cpp Forms/MainFrame.h
             Forms/Forms.cpp Forms/Forms.h
             Forms/PreferencesDialog.cpp Forms/PreferencesDialog.hpp
+            Forms/PlugBoardSettingsDialog.cpp
+            Forms/PlugBoardSettingsDialog.h
 
             )
 
