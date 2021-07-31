@@ -7,6 +7,8 @@
 
 #include "Forms.h"
 
+#include "../res/ENIGMA_M3.bmp.h"
+
 ///////////////////////////////////////////////////////////////////////////
 
 MainFrameBase::MainFrameBase(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &pos,
@@ -503,7 +505,7 @@ AboutDialogBase::AboutDialogBase( wxWindow* parent, wxWindowID id, const wxStrin
     wxBoxSizer* bSizer72;
     bSizer72 = new wxBoxSizer( wxVERTICAL );
 
-    m_bitmap1 = new wxStaticBitmap( m_panel12, wxID_ANY, wxBitmap( wxT("../../../ENIGMA_M3.bmp"), wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_bitmap1 = new wxStaticBitmap( m_panel12, wxID_ANY, ENIGMA_M3_bmp_to_wx_bitmap(), wxDefaultPosition, wxDefaultSize, 0 );
 
     bSizer72->Add( m_bitmap1, 0, wxALL, 5 );
 

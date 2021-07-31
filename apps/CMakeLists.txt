@@ -31,7 +31,10 @@ if(wxWidgets_FOUND)
             #Forms/PlugBoardSettingsDialog.cpp
             #Forms/PlugBoardSettingsDialog.h
 
-            EM3defs.h)
+            EM3defs.h
+
+            res/ENIGMA_M3.bmp.h
+            )
 
     # Define the build target for the executable
     add_executable(EnigmaM3-windows-x64 ${SRC_FILES})

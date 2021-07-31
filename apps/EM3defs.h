@@ -5,7 +5,7 @@
 #define EM3_APP_NAME					"EnigmaM3"
 
 // Version displayed to user
-#define VERSION_STRING					"0.3.2"
+#define VERSION_STRING					"0.3.3"
 
 // Release date
 #define EM3_STR_RELEASE_DATE			"July 31, 2021"
