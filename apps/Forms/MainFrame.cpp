@@ -1,6 +1,7 @@
 #include "MainFrame.h"
 #include "PreferencesDialog.hpp"
 #include "../stringModifier.hpp"
+#include "AboutDialog.h"
 
 
 MainFrame::MainFrame(wxWindow *parent) : MainFrameBase(parent) {
@@ -16,7 +17,8 @@ void MainFrame::OnPreferencesMenuItemSelected(wxCommandEvent &event) {
 
 void MainFrame::OnAboutMenuItemSelected( wxCommandEvent& event ) {
 ///TODO:
-
+    AboutDialog dialog(this);
+    dialog.ShowModal();
 }
 
 void MainFrame::OnTextInput(wxCommandEvent &event) {

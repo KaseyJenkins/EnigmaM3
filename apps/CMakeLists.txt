@@ -24,11 +24,14 @@ if(wxWidgets_FOUND)
             Forms/Forms.cpp Forms/Forms.h
             Forms/PreferencesDialog.cpp Forms/PreferencesDialog.hpp
 
+            Forms/AboutDialog.cpp
+            Forms/AboutDialog.h
+
             # ToDeprecate
             #Forms/PlugBoardSettingsDialog.cpp
             #Forms/PlugBoardSettingsDialog.h
 
-            )
+            EM3defs.h)
 
     # Define the build target for the executable
     add_executable(EnigmaM3-windows-x64 ${SRC_FILES})

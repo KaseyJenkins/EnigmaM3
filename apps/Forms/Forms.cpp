@@ -475,3 +475,114 @@ PreferencesDialogBase::~PreferencesDialogBase()
     StdButtonsOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( PreferencesDialogBase::OnOkButtonClick ), NULL, this );
 
 }
+
+
+AboutDialogBase::AboutDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+    this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+
+    wxBoxSizer* bSizer68;
+    bSizer68 = new wxBoxSizer( wxVERTICAL );
+
+    wxBoxSizer* bSizer69;
+    bSizer69 = new wxBoxSizer( wxVERTICAL );
+
+    wxBoxSizer* bSizer70;
+    bSizer70 = new wxBoxSizer( wxVERTICAL );
+
+    bSizer70->SetMinSize( wxSize( -1,78 ) );
+    m_panel12 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+    m_panel12->SetBackgroundColour( wxColour( 10, 108, 205 ) );
+
+    wxBoxSizer* bSizer71;
+    bSizer71 = new wxBoxSizer( wxVERTICAL );
+
+
+    bSizer71->Add( 0, 0, 1, wxEXPAND, 5 );
+
+    wxBoxSizer* bSizer72;
+    bSizer72 = new wxBoxSizer( wxVERTICAL );
+
+    m_bitmap1 = new wxStaticBitmap( m_panel12, wxID_ANY, wxBitmap( wxT("../../../ENIGMA_M3.bmp"), wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, 0 );
+
+    bSizer72->Add( m_bitmap1, 0, wxALL, 5 );
+
+
+    bSizer71->Add( bSizer72, 1, wxEXPAND, 5 );
+
+
+    m_panel12->SetSizer( bSizer71 );
+    m_panel12->Layout();
+    bSizer71->Fit( m_panel12 );
+    bSizer70->Add( m_panel12, 1, wxEXPAND, 5 );
+
+
+    bSizer69->Add( bSizer70, 0, wxEXPAND, 5 );
+
+    wxBoxSizer* bSizer74;
+    bSizer74 = new wxBoxSizer( wxVERTICAL );
+
+    wxBoxSizer* bSizer75;
+    bSizer75 = new wxBoxSizer( wxVERTICAL );
+
+    VersionStaticText = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+    VersionStaticText->Wrap( -1 );
+    bSizer75->Add( VersionStaticText, 0, wxALL, 5 );
+
+
+    bSizer75->Add( 0, 0, 1, wxEXPAND, 5 );
+
+    CopyrightStaticText = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+    CopyrightStaticText->Wrap( -1 );
+    bSizer75->Add( CopyrightStaticText, 0, wxALL, 5 );
+
+
+    bSizer75->Add( 0, 0, 1, wxEXPAND, 5 );
+
+    WebsiteHyperlink = new wxHyperlinkCtrl( this, wxID_ANY, wxT("https://github.com/KaseyJenkins/EnigmaM3"), wxT("."), wxDefaultPosition, wxDefaultSize, wxHL_DEFAULT_STYLE );
+    bSizer75->Add( WebsiteHyperlink, 0, wxALL|wxEXPAND, 5 );
+
+
+    bSizer74->Add( bSizer75, 1, wxEXPAND, 5 );
+
+
+    bSizer69->Add( bSizer74, 1, wxALL|wxEXPAND, 15 );
+
+    m_staticline7 = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+    bSizer69->Add( m_staticline7, 0, wxALL|wxEXPAND, 5 );
+
+    wxBoxSizer* bSizer73;
+    bSizer73 = new wxBoxSizer( wxHORIZONTAL );
+
+
+    bSizer73->Add( 0, 0, 1, wxEXPAND, 5 );
+
+    OKButton = new wxButton( this, wxID_OK, wxT("OK"), wxDefaultPosition, wxDefaultSize, 0 );
+    bSizer73->Add( OKButton, 0, wxALL, 5 );
+
+
+    bSizer73->Add( 0, 0, 1, wxEXPAND, 5 );
+
+
+    bSizer69->Add( bSizer73, 0, wxEXPAND, 5 );
+
+
+    bSizer68->Add( bSizer69, 1, wxEXPAND, 5 );
+
+
+    this->SetSizer( bSizer68 );
+    this->Layout();
+    bSizer68->Fit( this );
+
+    this->Centre( wxBOTH );
+
+    // Connect Events
+    WebsiteHyperlink->Connect( wxEVT_COMMAND_HYPERLINK, wxHyperlinkEventHandler( AboutDialogBase::OnWebsiteHyperlinkClick ), NULL, this );
+
+}
+
+AboutDialogBase::~AboutDialogBase()
+{
+    // Disconnect Events
+    WebsiteHyperlink->Disconnect( wxEVT_COMMAND_HYPERLINK, wxHyperlinkEventHandler( AboutDialogBase::OnWebsiteHyperlinkClick ), NULL, this );
+}

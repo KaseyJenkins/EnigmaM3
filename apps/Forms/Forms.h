@@ -11,9 +11,7 @@
 #include <wx/artprov.h>
 #include <wx/xrc/xmlres.h>
 #include <wx/string.h>
-#include <wx/choice.h>
 #include <wx/bitmap.h>
-#include <wx/tglbtn.h>
 #include <wx/image.h>
 #include <wx/icon.h>
 #include <wx/menu.h>
@@ -27,8 +25,14 @@
 #include <wx/statbox.h>
 #include <wx/panel.h>
 #include <wx/frame.h>
+#include <wx/choice.h>
+#include <wx/tglbtn.h>
 #include <wx/notebook.h>
 #include <wx/dialog.h>
+#include <wx/statbmp.h>
+#include <wx/stattext.h>
+#include <wx/hyperlink.h>
+#include <wx/statline.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -195,6 +199,33 @@ public:
 };
 
 
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class AboutDialogBase
+///////////////////////////////////////////////////////////////////////////////
+class AboutDialogBase : public wxDialog
+        {
+        private:
+
+        protected:
+            wxPanel* m_panel12;
+        wxStaticBitmap* m_bitmap1;
+        wxStaticText* VersionStaticText;
+        wxStaticText* CopyrightStaticText;
+        wxHyperlinkCtrl* WebsiteHyperlink;
+        wxStaticLine* m_staticline7;
+        wxButton* OKButton;
+
+        // Virtual event handlers, overide them in your derived class
+        virtual void OnWebsiteHyperlinkClick( wxHyperlinkEvent& event ) { event.Skip(); }
+
+
+        public:
+
+            AboutDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("About EnigmaM3"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_DIALOG_STYLE );
+            ~AboutDialogBase();
+
+        };
 
 
 #endif //ENIGMAWXWIDGETS_FORMS1_HPP
