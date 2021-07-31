@@ -2,7 +2,6 @@
 #include "PreferencesDialog.hpp"
 #include "../stringModifier.hpp"
 
-#include "PlugBoardSettingsDialog.h"
 
 MainFrame::MainFrame(wxWindow *parent) : MainFrameBase(parent) {
 }

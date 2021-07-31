@@ -22,15 +22,73 @@ class PreferencesDialog : public PreferencesDialogBase {
 
 protected:
     // Handlers for PreferencesDialogBase events.
-    void OnOkButtonClick(wxCommandEvent &event) override;
+    void OnOkButtonClick( wxCommandEvent& event ) override;
 
-    void OnCancelButtonClick(wxCommandEvent &event) override { Close(); }
+    // ToDeprecate
+    //void OnCancelButtonClick(wxCommandEvent &event) { wxDialog::EndModal(wxID_CANCEL); }
+    //void OnResetButtonClick( wxCommandEvent& event );
 
-    void OnMoreSettingsButtonClick( wxCommandEvent& event ) override;
 
-    void OnPlugBoardSettingsMenuItemSelected( wxCommandEvent& event ) override;
+    void OnToggleButton_Q( wxCommandEvent& event );
+    void OnToggleButton_W( wxCommandEvent& event );
+    void OnToggleButton_E( wxCommandEvent& event );
+    void OnToggleButton_R( wxCommandEvent& event );
+    void OnToggleButton_T( wxCommandEvent& event );
+    void OnToggleButton_Y( wxCommandEvent& event );
+    void OnToggleButton_U( wxCommandEvent& event );
+    void OnToggleButton_I( wxCommandEvent& event );
+    void OnToggleButton_O( wxCommandEvent& event );
+    void OnToggleButton_P( wxCommandEvent& event );
+    void OnToggleButton_A( wxCommandEvent& event );
+    void OnToggleButton_S( wxCommandEvent& event );
+    void OnToggleButton_D( wxCommandEvent& event );
+    void OnToggleButton_F( wxCommandEvent& event );
+    void OnToggleButton_G( wxCommandEvent& event );
+    void OnToggleButton_H( wxCommandEvent& event );
+    void OnToggleButton_J( wxCommandEvent& event );
+    void OnToggleButton_K( wxCommandEvent& event );
+    void OnToggleButton_L( wxCommandEvent& event );
+    void OnToggleButton_Z( wxCommandEvent& event );
+    void OnToggleButton_X( wxCommandEvent& event );
+    void OnToggleButton_C( wxCommandEvent& event );
+    void OnToggleButton_V( wxCommandEvent& event );
+    void OnToggleButton_B( wxCommandEvent& event );
+    void OnToggleButton_N( wxCommandEvent& event );
+    void OnToggleButton_M( wxCommandEvent& event );
+
 
     UserPreferences Preferences;
+
+    std::unordered_map<char, wxToggleButton *> toggleBtnNames = {
+            {'A', m_toggleBtn_A},
+            {'B', m_toggleBtn_B},
+            {'C', m_toggleBtn_C},
+            {'D', m_toggleBtn_D},
+            {'E', m_toggleBtn_E},
+            {'F', m_toggleBtn_F},
+            {'G', m_toggleBtn_G},
+            {'H', m_toggleBtn_H},
+            {'I', m_toggleBtn_I},
+            {'J', m_toggleBtn_J},
+            {'K', m_toggleBtn_K},
+            {'L', m_toggleBtn_L},
+            {'M', m_toggleBtn_M},
+            {'N', m_toggleBtn_N},
+            {'O', m_toggleBtn_O},
+            {'P', m_toggleBtn_P},
+            {'Q', m_toggleBtn_Q},
+            {'R', m_toggleBtn_R},
+            {'S', m_toggleBtn_S},
+            {'T', m_toggleBtn_T},
+            {'U', m_toggleBtn_U},
+            {'V', m_toggleBtn_V},
+            {'W', m_toggleBtn_W},
+            {'X', m_toggleBtn_X},
+            {'Y', m_toggleBtn_Y},
+            {'Z', m_toggleBtn_Z}
+
+    };
+
 public:
     /** Constructor */
     PreferencesDialog(wxWindow *parent);

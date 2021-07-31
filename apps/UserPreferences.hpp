@@ -40,7 +40,7 @@ struct UserPreferences {
             InitialPosition2(wxT("A")),
             InitialPosition3(wxT("Z")),
 
-            PlugBoardwxString(wxT("ABCD")){}
+            PlugBoardwxStringInput(wxT("ABCD")){}
 
     void Load();
 
@@ -61,7 +61,7 @@ struct UserPreferences {
     wxString InitialPosition2;
     wxString InitialPosition3;
     // PlugBoard
-    wxString PlugBoardwxString;
+    wxString PlugBoardwxStringInput;
 
 protected:
     wxString GetPreferencesFileName() const { return L"Configuration.xml"; }
