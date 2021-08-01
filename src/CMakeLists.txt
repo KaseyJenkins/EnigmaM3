@@ -7,6 +7,6 @@ set_target_properties(
         VERSION 0.1.0
 )
 
-target_include_directories(enigma_library PUBLIC ../include)
+target_include_directories(enigma_library PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 target_compile_features(enigma_library PUBLIC cxx_std_17)

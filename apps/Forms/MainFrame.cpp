@@ -9,14 +9,11 @@ MainFrame::MainFrame(wxWindow *parent) : MainFrameBase(parent) {
 
 
 void MainFrame::OnPreferencesMenuItemSelected(wxCommandEvent &event) {
-
     PreferencesDialog dialog(this);
     dialog.ShowModal();
-
 }
 
-void MainFrame::OnAboutMenuItemSelected( wxCommandEvent& event ) {
-///TODO:
+void MainFrame::OnAboutMenuItemSelected(wxCommandEvent &event) {
     AboutDialog dialog(this);
     dialog.ShowModal();
 }
@@ -54,5 +51,3 @@ void MainFrame::OnClose(wxCloseEvent &event) {
     SavePreferences();
     Destroy();
 }
-
-
