@@ -26,6 +26,8 @@ if(wxWidgets_FOUND)
             Forms/AboutDialog.cpp
             #Forms/AboutDialog.h
 
+            tinyxml2/tinyxml2.cpp
+
             # ToDeprecate
             #Forms/PlugBoardSettingsDialog.cpp
             #Forms/PlugBoardSettingsDialog.h
@@ -38,8 +40,8 @@ if(wxWidgets_FOUND)
     # Define the build target for the executable
     add_executable(EnigmaM3-windows-x64 ${SRC_FILES})
 
-    target_include_directories(EnigmaM3-windows-x64 PUBLIC res)
-    target_include_directories(EnigmaM3-windows-x64 PUBLIC Forms)
+    target_include_directories(EnigmaM3-windows-x64 PRIVATE res)
+    target_include_directories(EnigmaM3-windows-x64 PRIVATE Forms)
 
     target_compile_features(EnigmaM3-windows-x64 PRIVATE cxx_std_17)
 

@@ -5,6 +5,7 @@
 
 
 MainFrame::MainFrame(wxWindow *parent) : MainFrameBase(parent) {
+    LoadPreferences();
 }
 
 

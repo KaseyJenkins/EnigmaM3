@@ -18,8 +18,9 @@
 #include <wx/wfstream.h>
 //#include <shellapi.h>
 
+#include "tinyxml2/tinyxml2.h"
 //#include <iostream>
-#include <memory.h>
+//#include <memory.h>
 //#include <stdio.h>
 //#include <stdlib.h>
 
@@ -66,6 +67,9 @@ struct UserPreferences {
 protected:
     wxString GetPreferencesFileName() const { return L"Configuration.xml"; }
 };
+
+
+void XMLDeclaration(tinyxml2::XMLDocument &xmlDoc, const std::string &valS = R"(xml version="1.0" encoding="UTF-8")");
 
 
 #endif //ENIGMAWXWIDGETS_USERPREFERENCES_HPP
