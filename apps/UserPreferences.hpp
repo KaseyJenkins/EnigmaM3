@@ -10,18 +10,18 @@
 #include <wx/imaglist.h>
 #include <wx/listctrl.h>
 #include <wx/mstream.h>
-#include <wx/power.h>
+//#include <wx/power.h>
 #include <wx/snglinst.h>
 #include <wx/taskbar.h>
 #include <wx/txtstrm.h>
 #include <wx/valgen.h>
 #include <wx/wfstream.h>
-#include <shellapi.h>
+//#include <shellapi.h>
 
-#include <iostream>
+//#include <iostream>
 #include <memory.h>
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
 
 struct UserPreferences {
     UserPreferences() :
