@@ -1,6 +1,6 @@
 # Enigma M3
-![Screenshot]()
-![Screenshot]()
+![Screenshot](https://github.com/KaseyJenkins/EnigmaM3/blob/master/.github/EnigmaM3-screenshot.png)
+![Screenshot](https://github.com/KaseyJenkins/EnigmaM3/blob/master/.github/EnigmaM3-Preferences-screenshot.png)
 ## Description
 
 Enigma M3 C++17 Emulator
