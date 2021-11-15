@@ -1,6 +1,6 @@
 #include "enigmaM3/enigma.h"
 
-int enigmaM3::myMod(const int &a, const int &b) {
+int enigmaM3::myMod(int const &a, int const &b) {
     return (a % b + b) % b;
 }
 
@@ -142,7 +142,7 @@ void enigmaM3::Rotor::transformationLeftToRight(char &c) {
     c = myMod((c - letterAbove), 26);
 }
 
-std::string enigmaM3::Reflector::reflectorWiringSequenceInitialization(char cR) {
+std::string enigmaM3::Reflector::reflectorWiringSequenceInitialization(char const cR) {
     if (cR == 'B') {
         return "YRUHQSLDPXNGOKMIEBFZCWVJAT";
     } else if (cR == 'C') {
@@ -152,7 +152,7 @@ std::string enigmaM3::Reflector::reflectorWiringSequenceInitialization(char cR) 
     }
 }
 
-enigmaM3::Reflector::Reflector(char c) :
+enigmaM3::Reflector::Reflector(char const c) :
         ReflectorWiringSequence(reflectorWiringSequenceInitialization(c)) {
     normalizeASCIIindex(ReflectorWiringSequence);
 }
@@ -161,7 +161,7 @@ void enigmaM3::Reflector::transformationReflector(char &c) {
     c = ReflectorWiringSequence[static_cast<int>(c)];
 }
 
-enigmaM3::Plugboard::Plugboard(std::string &s) :
+enigmaM3::Plugboard::Plugboard(std::string const &s) :
         PlugboardWiringSequence(s) {
     normalizeASCIIindex(PlugboardWiringSequence);
 }

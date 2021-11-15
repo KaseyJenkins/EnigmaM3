@@ -38,7 +38,6 @@ namespace enigmaM3 {
         //https://crypto.stackexchange.com/a/71327
         void RingSetting(int);
 
-        friend void normalizeASCIIindex(std::string &);
     };
 
 
@@ -46,7 +45,7 @@ namespace enigmaM3 {
 
     public:
 
-        explicit Reflector(char);
+        explicit Reflector(char const);
 
         void transformationReflector(char &);
 
@@ -54,16 +53,15 @@ namespace enigmaM3 {
 
         std::string ReflectorWiringSequence;
 
-        std::string reflectorWiringSequenceInitialization(char);
+        std::string reflectorWiringSequenceInitialization(char const);
 
-        friend void normalizeASCIIindex(std::string &);
     };
 
     class Plugboard {
 
     public:
 
-        explicit Plugboard(std::string &);
+        explicit Plugboard(std::string const &);
 
         void plugboardSubstitution(char &);
 
@@ -71,7 +69,6 @@ namespace enigmaM3 {
 
         std::string PlugboardWiringSequence;
 
-        friend void normalizeASCIIindex(std::string &);
     };
 
 }

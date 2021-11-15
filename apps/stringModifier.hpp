@@ -64,7 +64,7 @@ initializationSequence(std::string &message, const std::array<int, 3> &rotors, c
 
 }
 
-inline int rotorIntSettingConversion(const wxString &rotorSettingStringValue) {
+inline int rotorIntSettingConversion(wxString const &rotorSettingStringValue) {
 
     if (rotorSettingStringValue == "I") { return 1; }
     if (rotorSettingStringValue == "II") { return 2; }
@@ -74,10 +74,10 @@ inline int rotorIntSettingConversion(const wxString &rotorSettingStringValue) {
     if (rotorSettingStringValue == "VI") { return 6; }
     if (rotorSettingStringValue == "VII") { return 7; }
     if (rotorSettingStringValue == "VIII") { return 8; }
-
+    else { return 1; }
 }
 
-inline char reflectorCharConversion(const wxString &reflectorValue) {
+inline char reflectorCharConversion(wxString const &reflectorValue) {
     if (reflectorValue == "UKW-B") {
         return 'B';
     } else {
