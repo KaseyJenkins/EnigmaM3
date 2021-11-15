@@ -1,5 +1,5 @@
 
-set(wxWidgets_ROOT_DIR ../../../../../../_libs/WxWidgets)
+set(wxWidgets_ROOT_DIR ../../../../../_libs/wxWidgets)
 # Request the required wxWidgets libs
 find_package(wxWidgets 3.1 COMPONENTS core base REQUIRED)
 
